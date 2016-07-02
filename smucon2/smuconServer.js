@@ -133,13 +133,15 @@ exp.post('/room_join',function(request,response){
 });
 
 exp.post('/room_make',function(request,response){
-  	//console.log("들어는 올게");
+  	
+	var num = 1;
+	//console.log("들어는 올게");
 
 form
  .on('file', function(field, file) {
 	 
 	  console.log('file name='+file.name);   	 
-	  console.log("방이 만들어진다?.");
+	  //console.log("방이 만들어진다?.");
  	 
  	
 	  var checkDB=1; 
@@ -163,7 +165,7 @@ form
 		  	console.log('no file ');
 		  	
 		  }
-	  else{
+	  else if(num){
 	        console.log(field, file);
 	        files.push([field, file]);
 	        //java convert 부분 //
@@ -171,7 +173,7 @@ form
 	        var filepath = file.path;
 	       
 	        console.log(roomname);
-
+	        num = 0;
 	        var java = child.spawn('java',['-cp','.;C:/test/itextpdf-5.4.1.jar;C:/test/poi-3.11.jar;C:/test/poi-examples-3.11.jar;C:/test/poi-excelant-3.11.jar;C:/test/poi-ooxml-3.11.jar;C:/test/poi-ooxml-schemas-3.11.jar;C:/test/poi-scratchpad-3.11.jar;C:/test/xmlbeans-5.1.6.jar','ConvertPPT',filepath,roomname],{stdio:[ 'pipe',null,null, 'pipe' ]});
 	        java.stdout.on('data', function(data){
 	            console.log("[java]"+data.toString());
@@ -206,6 +208,7 @@ form
 	                );
 
 	            });
+	            
 		   });
 			  
 		   java.stdin.end();
@@ -215,20 +218,7 @@ form
  })
  .on('end', function(field, file) {
    console.log('-> upload done');
-   /*
-   response.writeHead(200, {'content-type': 'text/plain'});
-   response.write('received fields:\n\n '+util.inspect(fields));
-   response.write('\n\n');
-   response.end('received files:\n\n '+util.inspect(files));
-   
-   
-   
-   fs.readFile('ViewerRtc.html','binary',function(err,file){
-       response.writeHead(200);
-       response.write(file, 'binary');
-       response.end();
-   });
-   */
+
    
  });
  console.log("end");

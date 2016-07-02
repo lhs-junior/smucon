@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>SMUCON</title>
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap-fileupload.min.css" />
+
+
+		<!-- scripts -->
+        <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
+        <!--  Necessary scripts  -->
+
+        <script type="text/javascript" src="assets/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.hoverdir.js"></script>
+
+        <script src="assets/js/bootstrap-fileupload.js"></script>
+
+
+        <!-- script for portfolio section using hoverdirection 
+        <script type="text/javascript">
+            $(function() {
+
+                $('.portfolio-item > .item-image').each( function() { $(this).hoverdir({
+                    hoverDelay : 75
+                }); } );
+
+            });
+        </script>
+        -->
+        <!-- script for twitter-feed using owl carousel-
+        <script type="text/javascript">
+            $(document).ready(function() {
+ 
+                $("#twit").owlCarousel({
+                 
+                    navigation : true, // Show next and prev buttons
+                    slideSpeed : 100,
+                    paginationSpeed : 400,
+                    navigationText : false,
+                    singleItem: true,
+                    autoPlay: true,
+                    pagination: false
+                });
+ 
+            });
+        </script>
+        -->
+        <!-- script for testimonial section using owl carousel 
+        <script type="text/javascript">
+            $(document).ready(function() {
+ 
+                $("#client-speech").owlCarousel({
+                 
+                    autoPlay: 5000, //Set AutoPlay to 3 seconds
+                    stopOnHover: true,
+                    singleItem:true
+                });
+ 
+            });
+        </script>
+        -->
+		<!--<script src="/socket.io/socket.io.js"></script>-->
+		<script>
+			function test()
+			{
+				location.href='/Test_views';
+			}
+		</script>
+		<style>
+            .m_b{
+                width:110px; height:40px; border-radius:20px; background-color:rgba(0,0,0,0); border:solid 1px #fff; color:#fff; margin-right:13px;
+            }
+        </style>
+</head>
+
+<body style="overflow-y:hiddne;">
+	
+	<div id="home-page">
+	
+	<!-- site-navigation start -->  
+            <nav id="mainNavigation" class="navbar navbar-dafault main-navigation" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- logo -->
+                        <div class="navbar-brand">
+                            <span class="sr-only">Avada Pro Agency</span>
+                            <a href="index.html">
+                                <img src="assets/img/logo.png" style="padding-top:12px;" class="img-responsive center-block" alt="logo">
+                            </a>
+                        </div>
+                        <!-- /.logo -->
+                    </div><!-- /.navbar-header -->
+                    <!-- nav links -->
+                    <div class="collapse navbar-collapse" id="main-nav-collapse">
+                        <ul class="nav navbar-nav navbar-right text-uppercase">
+                            <li>
+                                <a href="login.html"><span>Logout</span></a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#alert"><span>alert</span></a>
+                            </li>
+                        </ul>
+                    </div><!-- nav links --> 
+                </div><!-- /.container -->
+            </nav>
+            <!-- site-navigation end -->
+	
+            <!-- header start -->
+            <header id="header" class="header-wrapper home-parallax home-fade">
+                <div class="header-overlay"></div>
+                <div class="header-wrapper-inner">
+                    <div class="container" >
+                        <div class="welcome-speech">
+                            <h1 style="color:#fff; font-weight:">Welcome to SMUCON!</h1>
+                            <p style="color:#fff; letter-spacing: 1.5px;">SMUCON을 이용하여 간편하게 회의를 시작해보세요.</p>
+                            <a href="#" data-toggle="modal" data-target="#add_mt">
+                                <button class="m_b">회의 만들기</button>
+                            </a>
+                            <a href="#" data-toggle="modal" data-target="#viewer">
+                                <button class="m_b">참여하기</button>
+                            </a>
+                            <a href="#" data-toggle="modal" data-target="#member_info">
+                                <button class="m_b">MY PAGE</button>
+                            </a>
+                            <a href="#" data-toggle="modal" data-target="#HowToUse"> 
+                                <p style="color:#fff; margin:4em 0 0 9em; letter-spacing: 1.2px;">SMUCON이용방법이 궁금한가요?</p>
+                            </a>
+                     </div><!-- /.intro -->  
+                 </div><!-- /.container -->
+               </div><!-- /.header-wrapper-inner -->
+            </header>
+            <!-- /#header -->
+            
+                        <div class="main-content">
+                <!--  begin portfolio section  -->
+                <section class="bg-light-gray">
+                    <div class="container">
+                        <div class="headline text-center">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <h2 class="section-title">지난 회의 목록입니다.</h2>
+                                    <p class="section-sub-title">
+                                        이미지를 클릭 하여 회의에 참여하세요.
+                                    </p> <!-- /.section-sub-title -->
+                                </div>
+                            </div>
+                        </div> <!-- /.headline -->
+                        <div class="portfolio-item-list">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="viewer.html">
+                                                <img src="assets/img/m_list_item.png" class="img-responsive center-block" alt="portfolio1">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row" style="font-size:1.12em;">
+                                                <div class="col-xs-7">
+                                                    <span style="margin-left:14px;">
+                                                        <span>이현수님의 회의</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom btn-default btn-xs">수정</button>
+                                                    <button type="button" class="btn-custom btn-default btn-xs">삭제</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="#">
+                                                <img src="assets/img/m_list_item2.png" class="img-responsive center-block" alt="portfolio2">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row">
+                                                <div class="col-xs-7">
+                                                    <span class="title" style="float:left;">
+                                                        <input type="text" placeholder="최정훈님의 회의"/>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom_2 btn-default btn-xs">수정완료</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="#">
+                                                <img src="assets/img/m_list_item3.png" class="img-responsive center-block" alt="portfolio2">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row">
+                                                <div class="col-xs-7">
+                                                    <span class="title">
+                                                        <input type="text" placeholder="백범님의 회의"/>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom_2 btn-default btn-xs">수정완료</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                                <div class="portfolio-item-list">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="#">
+                                                <img src="assets/img/m_list_item5.png" class="img-responsive center-block" alt="portfolio1">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row" style="font-size:1.12em;">
+                                                <div class="col-xs-7">
+                                                    <span style="margin-left:14px;">
+                                                        <span>전지원님의 회의</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom btn-default btn-xs">수정</button>
+                                                    <button type="button" class="btn-custom btn-default btn-xs">삭제</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="#">
+                                                <img src="assets/img/m_list_item4.png" class="img-responsive center-block" alt="portfolio2">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row">
+                                                <div class="col-xs-7">
+                                                    <span class="title">
+                                                        <input type="text" placeholder="최정훈님의 회의"/>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom_2 btn-default btn-xs">수정완료</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="#">
+                                                <img src="assets/img/m_list_item6.png" class="img-responsive center-block" alt="portfolio2">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+                                        <div class="item-description">
+                                            <div class="row">
+                                                <div class="col-xs-7">
+                                                    <span class="title">
+                                                        <input type="text" placeholder="최영찬님의 회의"/>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <button type="button" class="btn-custom_2 btn-default btn-xs">수정완료</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+                            </div>
+                        </div> <!-- end of portfolio-item-list -->
+                    </div>
+                    <nav align="center">
+                      <ul class="pagination">
+                        <li class="disabled">
+                          <a href="#" aria-label="Previous" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li><a href="#" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">1</a></li>
+                        <li><a href="#" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">2</a></li>
+                        <li><a href="#" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">3</a></li>
+                        <li><a href="#" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">4</a></li>
+                        <li><a href="#" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next" style="border:1px #c6c6c6 solid; background-color:#fff; color:#000; border-radius:4px;">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>       
+                </section> 
+                <!--   end of portfolio section  -->
+
+            </div> <!-- end of /.main-content -->
+            
+                        <div class="modal fade" id="add_mt" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#674c90; color:#fff;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">회의 만들기</h4>
+                        </div>
+                        <!-- 수정 -->
+                        <form method="post" action="/room_make" id="frm" name="frm" enctype="multipart/form-data">
+                            <div class="modal-body" align="center">
+                                <div class="container-fluid">
+                                    <div class="row text-center" style="font-size:1.15em; color:#8f8f8f;">
+                                        <div class="form-group" align="center">
+                                            <label class="control-label"></label>
+                                            <div class="">
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="input-group">
+                                                        <span class="btn btn-file btn-default" style="border-radius:4px;">
+                                                            <span class="fileupload-new">Select file</span>
+                                                            <span class="fileupload-exists">Change</span>
+                                                            <input type="file" name="upload" multiple="multiple"/>
+                                                        </span> 
+                                                        <a href="#" class="btn btn-default fileupload-exists" style="background-color:#674c90; border-radius:4px; color:#fff; margin-left:10px;" data-dismiss="fileupload">Remove</a>
+                                                        <br /> <br />
+                                                        <div class="col-lg-12">
+                                                            <i class="icon-file fileupload-exists"></i>
+                                                            <span class="fileupload-preview"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span>
+                                           회의에 사용 할 문서를 업로드하세요.<br />
+                                            <span style="font-size:0.8em;">
+                                                <font style="color:#674c90; font-weight:bold;">!</font>&nbsp;SMUCON에서 지원하는 파일 형식은 <font style="color:#674c90; font-weight:bold;">.ppt .pptx .pdf</font> 입니다.
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" style="border-radius:4px;" name="open" value="open">제출</button>
+                            </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+			
+			
+			
+			<form method="post" action="/room_join">
+                <div class="modal fade" id="viewer" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#674c90; color:#fff;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">회의 참여하기</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row text-center">
+                                        <span style="font-size:1.15em; color:#8f8f8f;">참여할 회의방의 <font style="color:#674c90;">방 번호</font>를 입력하세요.</span><br />
+                                        <input type="text" placeholder="&nbsp;ex ) J4K8E7" size="40" id="room_id" name="join" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" id="room_join" style="border-radius:4px;">들어가기</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+              </form>
+                
+                <!--  loading 툴 Modal  -->
+	<div class="modal fade" id="loading" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" data-backdrop='static'>
+		<div class="modal-dialog">
+            <div class="modal-content">
+				<div class="row" >
+					<div class="wrap-loading">
+						<div class="col-md-2 col-xs-2 col-xs-offset-5 col-md-offset-5">
+    						<div>
+    							<span><h5 style="color:red; font-size:15px; font-weight:bold;">문서 변환 중...</h5></span>
+    						</div>
+    						<div class="ball-loader">
+							</div>
+						</div>
+					</div> 
+				</div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+                <div class="modal fade" id="member_info" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#674c90; color:#fff;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">이현수님의 정보</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div align="center">
+                                            <div class="form-group" align="center">
+                                                <label class="control-label"></label>
+                                                <div>
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="assets/img/demoUpload.jpg" alt="" /></div>
+                                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                        <div>
+                                                            <span class="btn btn-file btn-default" style="border-radius:4px;"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="upload" multiple="multiple"/></span>
+                                                            <a href="#" class="btn btn-default fileupload-exists" style="border-radius:4px; color:#fff; background-color:#674c90;" data-dismiss="fileupload">Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <dl class="dl-horizontal">
+                                            <dt>Name</dt>
+                                            <dd>이현수</dd>
+                                            <dt>User ID</dt>
+                                            <dd>hannachoi</dd>
+                                            <dt>Password</dt>
+                                            <dd>da***</dd>
+                                            <dt>E-mail</dt>
+                                            <dd>choifourteen@gmail.com</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" style="border-radius:4px;" data-dismiss="modal">닫기</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                
+                <div class="modal fade bs-example-modal-lg" id="HowToUse" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel"><font style="color:#674c90;">smucon</font>&nbsp;사용방법</h4>
+                            </div>
+                            <div class="modal-body" style="margin-bottom:28px;">
+                                <div class="container-fluid" style="width:700px; ">
+                                    <div class="row text-center">
+                                                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <!-- alert modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color:#674c90; color:#fff;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">회의 요청입니다</h4>
+                      </div>
+                      <div class="modal-body" align="center" style="color:#5a5a5a;">
+                        전지원님께서 회의 참여를 원합니다.<br />
+                        수락 하시겠습니까?
+                      </div>
+                      <div class="modal-footer" style="border:none;">
+                        <button type="button" class="btn btn-default" style="border-radius:8px;"data-dismiss="modal">거절</button>
+                        <button type="button" class="btn btn-default" style="border-radius:8px;">수락</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- smutalk 4th modal -->
+                <div class="modal fade bs-example-modal-lg" id="smutalk" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#2d2d2d; color:#fff; border:none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">SMUTalk 4기 팀원 소개입니다.</h4>
+                            </div>
+                            <div class="modal-body" style="background: url(assets/img/twitter-feed-bg.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+                                <div class="container-fluid">
+                                    <div class="row text-center">
+                                        <section>
+                                            <div id="client-speech" class="owl-carousel owl-theme">
+                                                <div class="item">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client3">
+                                                                    <p class="client-intro">지도교수 장혜진</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client4">
+                                                                    <p class="client-intro">팀장 이현수</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client1">
+                                                                    <p class="client-intro">팀원 백범</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client2">
+                                                                    <p class="client-intro">팀원 최영찬</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client3">
+                                                                    <p class="client-intro">팀원 최정훈</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client4">
+                                                                    <p class="client-intro">팀원 최한나</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client5">
+                                                                    <p class="client-intro">팀원 전지원</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="client-box">
+                                                                <div class="about-client">
+                                                                    <img src="./image/placehold110x95.png" alt="client6">
+                                                                    <p class="client-intro">팀원 전지원</p>
+                                                                </div> <!-- end of /.about-client -->
+                                                                <div class="main-speech">
+                                                                    <p>
+                                                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.
+                                                                    </p>
+                                                                </div> <!-- end of /.main-speech  -->
+                                                            </div> <!-- end of /.client-box -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end of /#client-speech  /.owl-carousel -->
+                                        </div> <!-- end of .container -->
+                                    </section>                                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+	
+	<p onclick="test()">test</p>
+            
+            <!-- footer-navigation start -->  
+            <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- navbar logo -->
+                        <div class="navbar-brand">
+                            <span class="sr-only">&copy;SMUTalk 4th</span>
+                            <a href="#" data-toggle="modal" data-target="#smutalk">
+                                &copy;SMUTalk 4th
+                            </a>
+                        </div>
+                        <!-- navbar logo -->
+                    </div><!-- /.navbar-header -->
+                </div><!-- /.container -->
+            </nav>
+            <!-- footer-navigation end -->
+           </div> <!-- end of /#home-page -->
+		</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<script>
+		//socket = io.connect('http://203.237.183.107:9001');
+	$(document).ready(function(){
+		/*
+		$('#file').change(function(e){
+			var file = e.target.files[0];
+			var stream = ss.createStream();
+			
+			ss(socket).emit('file',stream,{size:file.size,name:file.name});
+			ss.createBlobReadStream(file).pipe(stream);
+		});
+		*/
+			var roomname;
+		$('#room_join').click(function(){
+			roomname = $('#room_id').val();
+			//alert(roomname);
+			//$.post("https://203.237.183.107:1220/room_join",{roomname:roomname});
+		});
+
+		
+		$("#abcd").click(function(){
+			alert("asdf");
+		});
+
+
+		
+		$("#file").change(function(){
+			
+			var form = $('#frm')[0];
+			var formData = new FormData(form);
+			$.ajax({
+				url: '/upload',
+				processData: false,
+				contentType: false,
+				data: formData,
+				datatype:"text",
+				type: 'POST',
+			    success: function(data) {
+			    	//location.href = "/viewer";
+			    	//console.log(data);
+			    	
+/* 			        $.ajax({
+			        	url : "http://203.237.183.107:8080/pdfinfo/info.jsp",
+			        	dataType : "jsonp",
+			        	async:false,
+			        	type : "GET",
+			        	contentType:"application/json",
+			        	crossDomain:true,
+			        	success : function(d){
+			        		var myXML = rplLine(d.responseText);
+			        		socket.broadcast.emit('toss',{name:name,path:path,type:type});
+			        	},error:function(request,status,error){
+			    			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			        	}
+			        }); */
+			    	
+			    }
+			});
+			//socket.emit('test',{form:formData});
+		//alert('test');
+			var fs = document.getElementsByName('file')[0];
+			//console.log(fs);
+			fs.form.reset();
+		});
+		
+	});
+
+		</script>
+</html>
+

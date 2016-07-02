@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.webrtc-experiment.com/style.css">
+
+<title>RTC TEST</title>
+
+<meta name="description"
+	content="Many-to-Many Video Conferencing using RTCMultiConnection v3.0" />
+<meta name="keywords"
+	content="WebRTC,RTCMultiConnection,Demos,Experiments,Samples,Examples" />
+
+<style>
+video {
+	object-fit: fill;
+	width: 20%;
+}
+
+button, input, select {
+	font-weight: normal;
+	padding: 2px 4px;
+	text-decoration: none;
+	display: inline-block;
+	text-shadow: none;
+	font-size: 16px;
+	outline: none;
+}
+
+.make-center {
+	text-align: center;
+	padding: 5px 10px;
+}
+</style>
+</head>
+
+<body>
+
+	<section class="experiment">
+		<div class="make-center">
+			<input type="text" id="room-id" value="abcdef">
+			<button id="open-room">Open Room</button>
+			<button id="join-room">Join Room</button>
+			<button id="on-off" value="on" style="visibility:hidden">on/off</button>	
+		</div>
+		<div id="videos-container"></div>
+		<div id="users-container" style="border:1px dashed #BDBDBD; position:relative; top:10%;left:5%;width:90%;margin-bottom:5px; display:none;"></div>
+	</section>
+
+	<script src="./RTCMultiConnection.js"></script>
+	<!--<script src="https://cdn.webrtc-experiment.com/rmc3.min.js"></script>-->
+
+	<!-- <script src="/dev/FileBufferReader.js"></script> -->
+	<script src="https://cdn.webrtc-experiment.com:443/rmc3.fbr.min.js"></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
+	
+	<script>
+		//방 생성
+		document.getElementById('open-room').onclick = function() {
+            this.disabled = true;
+            connection.open(document.getElementById('room-id').value);
+            document.getElementById('on-off').style.visibility='visible';
+            document.getElementById('users-container').style.display='';
+        };
+		 
+		// 버튼 정지 or 시작버튼
+		var connection = new RTCMultiConnection();
+
+		// by default, socket.io server is assumed to be deployed on your own URL
+		connection.socketURL = '/';
+		connection.socketMessageEvent = 'video-conference-demo';
+		
+		var chatContainer = document.querySelector('.chat-output');
+
+		function appendDIV(event) {
+			var div = document.createElement('div');
+			div.innerHTML = event.data || event;
+			chatContainer.insertBefore(div, chatContainer.firstChild);
+			div.tabIndex = 0;
+			div.focus();
+
+			document.getElementById('input-text-chat').focus();
+		}
+
+		// ......................................................
+		// ..................RTCMultiConnection Code.............
+		
+		
+		document.getElementById('room-id').value= connection.token() ;
+
+		connection.session = {
+			audio : true,
+			video : true
+		};
+
+		connection.sdpConstraints.mandatory = {
+			OfferToReceiveAudio : true,
+			OfferToReceiveVideo : true
+		};
+
+		var videosContainer = document.getElementById('videos-container');
+		connection.onstream = function(event) {
+			videosContainer.appendChild(event.mediaElement);
+
+			setTimeout(function() {
+				event.mediaElement.play();
+			}, 5000);
+		};
+
+		function stops() {
+			connection.attachStreams.forEach(function(stream) {
+           		stream.stop();
+      		});
+		}
+		
+		connection.onmessage = appendDIV;
+		
+		connection.socketCustomEvent = connection.channel;
+		connection.connectSocket(function(socket) {
+			socket.on(connection.socketCustomEvent,function(message) {
+				if(message.customMessage=="off"){
+					stops();
+				}else if(message.customMessage=="on"){
+					connection.rejoin(connection.connectionDescription);  
+				}else if(message.customMessage=="orderOn"){
+					if(message.receiver==connection.userid){//지목한 사람이 자신일경우
+						//alert("너 켜져");
+						connection.rejoin(connection.connectionDescription);
+					}
+				}else if(message.customMessage=="orderOff"){
+					if(message.receiver==connection.userid){//지목한 사람이 자신일경우
+						//alert("너 꺼져");
+						stops();
+					}
+				}
+				
+				//방에 새로운 사람이 Join 했을경우 입장한 방의 방장이 Join message를 받게됨 (sessionid = roomid : 초기값=서버ip)
+				if(message.customMessage=="Join" && message.senderSessionid==connection.sessionid){ 
+					var usersContainer = document.getElementById('users-container');
+					//alert(message.sender+"님이 입장하셨습니다.");
+					function createButton(context/*, func*/){ 
+			        	var button = document.createElement("input"); 
+			        	button.type = "button"; 
+			        	button.id = "stateOn";
+			        	button.value = message.sender; 
+			        	button.onclick = function() { //userid버튼 클릭 이벤트
+			        		if(this.id=="stateOn"){ //on상태일때,
+			        			alert("해당 유저의 미디어를 종료합니다.");
+				        		this.id="stateOff";
+				        		socket.emit(connection.socketCustomEvent, { //종료메세지발송
+			    					sender : connection.userid,
+			    					receiver : this.value,
+			    					customMessage : "orderOff"
+			    				});
+				        		this.style.color = "#ff0000";
+			        		}
+			        		else if(this.id=="stateOff"){ //off상태일때,
+			        			alert("해당 유저의 미디어를 실행시킵니다.");
+			        			this.id="stateOn";
+			        			socket.emit(connection.socketCustomEvent, { //종료메세지발송
+				    				sender : connection.userid,
+				    				receiver : this.value,
+				    				customMessage : "orderOn"
+				    			});
+			        			this.style.color = "#00ff00";
+			        		}
+			        	};
+			        	button.style = "font-size:13px; padding:1px 2px; margin-left:5px; color:#00ff00"
+			        	context.appendChild(button); 
+			       	}
+					//유저 버튼 생성
+			        createButton(usersContainer);
+				}
+			});
+			
+			//조인 이벤트 & 방장에게 내 아이디 보내기
+			document.getElementById('join-room').onclick = function() {
+				this.disabled = true;
+				connection.connectionDescription = connection.join(document.getElementById('room-id').value);
+				
+				socket.emit(connection.socketCustomEvent, {
+    				sender : connection.userid,
+    				senderSessionid : connection.sessionid,
+    				customMessage : "Join"
+    			});
+			};
+
+			//방장외 전인원 화면 종료&재실행
+			document.getElementById('on-off').onclick = function() {
+    			var value=document.getElementById('on-off').value;
+            	if(value=='on'){ //on일때, turn-off
+            		var value=document.getElementById('on-off').value="off";
+        			socket.emit(connection.socketCustomEvent, {
+        				sender : connection.userid,
+        				customMessage : value
+        			});
+        			document.getElementById('on-off').style.color='#ff0000'; 
+            	}
+            	else if(value=='off'){ //off일때, turn-on
+            		var value=document.getElementById('on-off').value="on";
+        			socket.emit(connection.socketCustomEvent, {
+        				sender : connection.userid,
+        				customMessage : value
+        			});
+        			document.getElementById('on-off').style.color='#00ff00';
+            	}
+    		}
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+
+<<!DOCTYPE html>
+<html>
+<head>
+	<title>Web chat</title>
+	<script type="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="/socket.io/socket.io.js"></script>
+	<script>
+		$(document).ready(function(){
+			var socket = io.connect();
+
+			socket.emit('join', 'Lobby');
+			$('#inpRoomName').val('Lobby');
+
+			$('btnRoomEnt').click(function(){
+				if($('#inpRoomName').val()==''){
+				$('#inpRoomName').val('Lobby');
+				}
+				socket.emit('join', $('#inpRoomName').val());
+			});
+
+			socket.on('message', function(result){
+				var output = '<p>' + '[' + result.date+']<strong>'+result.inpUserName+'</strong>: ' + result.inpUserMessage+'</p>';
+				$(output).prependTo('#connect');
+
+			});
+
+			$('#btnUserMsg').click(function(){
+				if($('#inpUserMessage').val() != ''){
+					socket.emit('message', { inpUserName:$('#inpUserName').val(), inpUserMessage:$('#inpUserMessage').val(), date:new Date().toUTCString()
+					});
+				}
+				$('#inpUserMessage').val('');
+			});
+
+			$('#btnRoomExit',click(function(){
+				socket.disconnect();
+			});
+		});
+	</script>
+</head>
+<body>
+<h1> Socket.io chat</h1>
+<p> Chat with node.js and socket.io</p>
+<input id="inpRoomName"/>
+<button id="btnRoomEnt">Enter</button>
+<button id="btnRoomExit">Leave</button>
+<hr/>
+<input id = "inpUserName"/>
+<input id ="inpUserMessage"/>
+<button id ="btnUserMsg">Button</button>
+<ul id="content">
+</ul>
+</body>
+</html>

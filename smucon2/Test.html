@@ -1,0 +1,34 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+      <meta charset="utf-8"> 
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> 
+  </head> 
+  <body> 
+    <form action="/upload" method="post" enctype="multipart/form-data" id="dataform"> 
+     <input type="file" name="uploadFile" id="uploadFile"> 
+     <input type="submit" name="upload">
+    </form> 
+<script> 
+jQuery("#uploadFile").change(function(){ 
+	var formData = null; 
+	formData = new FormData(document.getElementsByName("dataform")[0]); 
+	jQuery.ajax({ 
+		type: "post", 
+		url: "/upload", 
+		data: formData, 
+		processData: false, 
+		contentType: false, 
+		success: function(data){ 
+			alert(data); 
+			}, 
+			error: function(err){ 
+				console.log(err); 
+				} 
+			}); 
+	document.getElementsByName("uploadFile")[0].form.reset(); 
+	} 
+}); 
+</script> 
+</body> 
+</html>

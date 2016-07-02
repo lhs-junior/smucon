@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="meta1" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="meta2" http-equiv="refresh" content="hi">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+<!-- 기본 pdf 디자인 -->
+<link href="/css/examples.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+/*pdf 보이는 공간 크기 조절*/
+#pdf {
+    width: 60%;
+    height: 400px;
+}
+
+/*파일 확대*/
+#pdf p {
+   padding: 4em;
+}
+
+#pdf object {
+   display: block;
+   border: 
+   solid 1px #666;
+}
+
+</style>
+</head>
+
+<body>
+<h3>파일 변환 API를 이용하여 ppt 파일 pdf로 변환하기</h3>
+<h3>Convert PPT to Pdf use file converter API</h3> 
+
+<form id="form" method="post" enctype="multipart/form-data" target="iframe">
+
+    <!-- 스텝 1 -->
+    <div id="step1">
+        Step1: select source file:<br />
+        <!-- 파일 업로드 폼 -->
+        <input type="file" id="file" name="File" size="0" />
+    </div>
+
+    <br />
+
+    <!-- 스텝 2 : convert type 정하기-->
+    <div id="step2" style="display: none;">
+        Step2: select destination format:<br />
+        <select id="outputFormat" name="outputFormat" value="default"></select>        
+        <br />
+
+        <!-- 스텝3 -->
+        Step3: enter api key:<br />
+             <input id="apiKey" name="ApiKey" type="text" value=" 222164027" />
+             <!-- 
+             <a href="http://www.convertapi.com/prices" target="_blanks">get free if you don't have one</a> -->
+        <br /><br />
+        <!-- convert 버튼 -->
+        <input type="submit" id="submit" value="Convert" />
+    </div>
+
+    <br />
+
+    
+    <div id="step3" style="display: none;">
+        Step3: Here is resulting url links.<br /> 
+        <small>*You can choose another file or another output format to repeat convertation.</small><br /><br />
+    </div>
+
+    <!-- hidden속성이 이상해서 btn으로 바꿨더니 true 버튼만 뜸 -->
+    <input type="hidden" name="StoreFile" value="true" />
+
+     <div id="step 4" style="display: none;">
+        Step 4 : Here is Pdf viewer<br/>
+        <div id="pdf">
+            <object data="/Users/jiwon/Downloads/Blue.pdf"
+                    type="application/pdf" 
+                    width="150%" 
+                    height="150%">
+            </object>
+        </div>
+    </div>
+</form>
+
+<div id="load_api" style="display: none;">
+Load availiable file formats from <i><b><span></span></b></i> 
+</div>
+    
+
+
+           
+
+</body>
+
+<script>
+var convertAPIs = [
+        
+        'http://do.convertapi.com/PowerPoint2Pdf',
+        /*'http://do.convertapi.com/Lotus2Pdf',
+        'http://do.convertapi.com/SnapShot2Pdf',
+        'http://do.convertapi.com/Image2Pdf',
+        'http://do.convertapi.com/Pdf2PowerPoint',
+        'http://do.convertapi.com/Xps2Pdf',
+        'http://do.convertapi.com/Word2Pdf',
+        'http://do.convertapi.com/RichText2Pdf',
+        'http://do.convertapi.com/Publisher2Pdf',
+        'http://do.convertapi.com/Excel2Pdf',
+        'http://do.convertapi.com/Text2Pdf',
+        'http://do.convertapi.com/OpenOffice2Pdf',
+        'http://do.convertapi.com/Email2Pdf',*/
+        
+];
+
+
+//Configuration map ext -> {'apiUrl' : url, 'outputFormats' : [ext1, ext2, ...]}
+var convertConfig = false;
+
+
+// onload :)
+$(function (){
+        
+        if(! checkBrowser()){
+            $('#step1').hide();
+            alert('We use HTML5 elements for cross-domain file upload. Looks like your browser does not support this feature - open this page in more recent browser please.');
+            return;
+        }
+        
+        $('#file').change(function(){
+                onFileSelect();
+        });
+        
+        $('#form').submit(function(event){
+                event.preventDefault();
+                convertFile();
+        });
+        
+ });
+
+
+/**
+ * Browser support check
+ * 브라우저 지원 확인 
+ */
+ function checkBrowser(){
+           
+     if(! window.FormData){
+         return false;
+     }
+     
+      if($.browser.msie && $.browser.version < 10){
+           if(! XDomainRequest){
+                return false;
+           }
+      }
+      
+      return true;
+ }
+ 
+
+/**
+ * File selection handler
+ * Load config if required and fill select control for step2
+ */
+function onFileSelect(){
+    
+    var filename = $('#file').val();
+    var ext = filename.substr(filename.indexOf('.', filename) + 1);
+    if(! ext){
+        alert('Can not convert selected file: converted file should have extension');
+        return;
+    }
+    
+    if(convertConfig){
+        selectFormat(ext);
+    }else{
+        loadConvertConfig(0, function(){
+                selectFormat(ext);
+        });
+    }
+}
+
+//Select available formats for conversion
+//변환 가능한 형식을 선택
+function selectFormat(ext){
+    
+    if(! convertConfig[ext]){
+        alert('Conversion for selected file format is not supported. Please select different file.');
+        $('#outputFormat').attr('disabled', 'disabled');
+        $('#submit').attr('disabled', 'disabled');
+        return;
+    }
+
+    
+    var html = '';
+    for(var i = 0; i < convertConfig[ext].outputFormats.length; i++){
+        var item = convertConfig[ext].outputFormats[i];
+        html += '<option name="'+item+'">'+item+'</option>';
+    }
+    $('#outputFormat').html(html);
+    
+    $('#form').attr('action', convertConfig[ext].apiUrl);
+}
+
+/**
+ * Loading available API configs
+ * 사용가능한 API를 로딩 
+ */
+function loadConvertConfig(apiIndex, callback){
+
+    //Initiate loading
+    if(apiIndex == 0){
+        onStartLoad();
+    }
+    
+    //Do we load all converter api?
+    if(apiIndex >= convertAPIs.length){
+        onEndLoad();
+        callback();
+        return;
+    }
+        
+    $('#load_api span').html(convertAPIs[apiIndex]);
+    
+    $.ajax({
+            url: convertAPIs[apiIndex] + '/json/info',
+            dataType: 'json',
+            success: function(data) {
+                if(data.Result){
+                    var inputFormat = data.InputFormat;
+                    var outputFormat = data.OutputFormat;
+                    addConfigItem(convertAPIs[apiIndex], inputFormat, outputFormat);
+                    loadConvertConfig(apiIndex + 1, callback);
+                }
+            }
+    });
+
+}
+
+function onStartLoad(){
+        $('#step1').hide();
+        $('#load_api').show();
+        convertConfig = new Object();
+}
+
+function onEndLoad(){
+        $('#step1').show();
+        $('#load_api').hide();
+        $('#step2').show();
+
+        $('#outputFormat').attr('disabled', null);
+        $('#submit').attr('disabled', null);
+}
+
+/**
+ * Helper function - construct single config item
+ */
+function addConfigItem(url, inputFormat, outputFormat){
+    url = url + '/json';
+    var inputFiles = inputFormat.split(',');
+    var outputFiles = outputFormat.split(',');
+    for(var i=0; i<inputFiles.length; i++){
+        convertConfig[inputFiles[i]] = {'apiUrl' : url, 'outputFormats' : outputFiles};
+    }
+}
+
+
+
+/**
+ * Send file to conversion service and update page with conversion result
+ * 변환 서비스에 파일을 보내고 변환이 완료되면 페이지를 업데이트 
+ */
+var httpRequest;
+function convertFile(){
+    
+    var formData = new FormData($('#form').get(0));
+    var url = $('#form').attr('action');
+    
+    if (window.XDomainRequest){
+        httpRequest=new XDomainRequest();  
+    }else if (window.XMLHttpRequest) {
+        httpRequest=new XMLHttpRequest();
+    }
+
+    httpRequest.onreadystatechange = handleResponse;
+    httpRequest.open('POST', url);
+    httpRequest.send(formData);
+
+    //Disable form on start conversion
+    $('#file').attr('disabled', 'disabled');
+    $('#outputFormat').attr('disabled', 'disabled');
+    $('#submit').attr('disabled', 'disabled');
+}
+
+/**
+ * Update page with conversion result
+ */
+function handleResponse(){
+    
+    if (httpRequest.readyState == 4) {
+        
+        if(httpRequest.status == 200){
+        
+            var filename = $('#file').val();
+            var outputFormat = $('#outputFormat').val();
+            var respJson = httpRequest.responseText;
+            var response = $.parseJSON(respJson);
+            
+            //remove fake path from filename
+            var parts = filename.split(/\\|\//);
+            filename = parts[parts.length-1];
+           
+
+            //파일 컨버터 결과
+            var output = 'File conversion error';
+            if(response){
+                if(response.Result){
+                    
+                    output = '<a href="'+response.FileUrl+'" down> '+response.OutputFileName+' </a> ('+response.FileSize+' bytes)'+' Credits left: '+response.CreditsLeft;
+                    
+                    
+                    var oldMeta = $("meta[name='meta2']").attr('content');
+                    console.log(oldMeta);
+                    var newMeta = $("meta[name='meta2']").attr('content', '3;url='+response.FileUrl);
+                    console.log(newMeta); 
+          
+                    location.href = "C:\Users\smu\pdfjs-1.3.91-dist\web\viewer.html";
+                    
+                }else{
+                    output = 'Error: '+response.Error; 
+                }
+            }
+        
+            output = '<div>Convert <b><i>'+filename+'</i></b> to <b><i>'+outputFormat+'</i></b>: '+output+'</div>';
+        
+
+            $('#step3').show().append(output);
+            
+        }
+
+        //Enable form on conversion end
+        $('#file').attr('disabled', null);
+        $('#outputFormat').attr('disabled', null);
+        $('#submit').attr('disabled', null);
+    }
+    
+}
+
+</script>
+</html>
